@@ -5,7 +5,7 @@ const { resolve } = require('path');
 const config = {
   mode: 'production',
   entry: {
-    app: `${resolve(__dirname, './src/index.js')}`,
+    app: `${resolve(__dirname, './src/index.tsx')}`,
   },
   output: {
     path: resolve(__dirname, './dist'),
@@ -20,6 +20,7 @@ const config = {
       stream: require.resolve('stream-browserify'),
       path: require.resolve('path-browserify'),
     },
+    extensions: ['.tsx', '.ts', '.js'],
   },
   externals: {
     bufferutil: 'bufferutil',
@@ -28,11 +29,11 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
         resolve: {
-          extensions: ['.js'],
+          extensions: ['.tsx', '.ts', '.js'],
         },
         options: {
           presets: [
@@ -44,6 +45,7 @@ const config = {
                 },
               }],
             '@babel/preset-react',
+            '@babel/preset-typescript',
           ],
           plugins: [
             'syntax-trailing-function-commas',
@@ -71,10 +73,16 @@ const config = {
         },
         loader: 'file-loader',
       },
-      // {
-      //   test: /\.css$/i,
-      //   use: ["style-loader", "css-loader"],
-      // },
+      {
+        test: /\.css$/i,
+        use: [
+          {
+            loader: "style-loader",
+            options: { injectType: "singletonStyleTag" },
+          },
+          "css-loader",
+        ],
+      },
     ],
   },
   plugins: [

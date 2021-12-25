@@ -1,5 +1,5 @@
 {
-  "name": "buftest",
+  "name": "tixer",
   "version": "0.1.0",
   "private": true,
   "repository": {
@@ -9,7 +9,7 @@
   "scripts": {
     "start": "DEBUG=true NACL_FAST=disable && webpack serve --config ./webpack.config.js",
     "copy": "rm -rf dist && mkdir dist && cp src/index.html ./dist",
-    "build": "NACL_FAST=disable npm run copy && webpack --config ./webpack.config.prod.js"
+    "build": "NACL_FAST=disable npm run copy && webpack --config ./webpack.config.js"
   },
   "dependencies": {
     "@liskhq/lisk-client": "^5.2.0",
@@ -31,9 +31,12 @@
     "@babel/plugin-transform-runtime": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-react": "^7.16.5",
+    "@babel/preset-typescript": "^7.16.5",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
     "babel-loader": "^8.2.3",
     "babel-plugin-import-glob": "^2.0.0",
     "babel-plugin-syntax-trailing-function-commas": "^6.22.0",
@@ -42,6 +45,7 @@
     "html-webpack-plugin": "^5.5.0",
     "os-browserify": "^0.3.0",
     "style-loader": "^3.3.1",
+    "typescript": "^4.5.4",
     "utf-8-validate": "^5.0.7",
     "webpack": "5.24.2",
     "webpack-bundle-analyzer": "3.3.2",
