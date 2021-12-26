@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { cryptography } from '@liskhq/lisk-client';
 import NetworkSelector from '../components/networkSelector';
+import Header from '../components/header';
 import Form from '../components/form';
 import Result from '../components/result';
 import { getNetworkConfig } from '../utils/api/network'
@@ -53,6 +54,7 @@ const App = () => {
 
   return (
     <section>
+      <Header />
       <NetworkSelector onNetworkChanged={setNetwork} />
       <Form
         setBasics={setBasics}
