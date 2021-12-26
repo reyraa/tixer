@@ -60,6 +60,59 @@ interface UnlockObject {
   unvoteHeight: number;
 }
 
+const isBigInt = (value: any) =>
+  (typeof value === 'bigint' || (typeof value === 'string' && value.slice(-1) === 'n'));
+
+const bigIntToString = (value: any) => {
+  if (typeof value === 'bigint') {
+    return String(value);
+  }
+  return value.slice(0, -1);
+};
+
+const binaryToString = (value: any) => {
+  if (value instanceof Uint8Array) {
+    return Buffer.from(value).toString('hex');
+  }
+  return value.toString('hex');
+};
+
+const isBufferArray = (arr: any[]) => arr.every((element) => {
+  if (element instanceof Uint8Array) {
+    return Buffer.isBuffer(Buffer.from(element));
+  }
+
+  return Buffer.isBuffer(element);
+});
+
+const bufferToHex = (value: any) => {
+  let result = value;
+  if (Array.isArray(value) && isBufferArray(value)) {
+    result = value.map(binaryToString);
+  } else if (Buffer.isBuffer(value)) {
+    result = binaryToString(value);
+  }
+
+  return result;
+};
+
+export const txToHex = (data: any) => {
+  const obj: { [key: string]: any } = {};
+  for (const key in data) {
+    const value = data[key];
+    if (key === 'votes' || key === 'unlockObjects') {
+      obj[key] = value.map((item: any) => txToHex(item));
+    } else if (typeof value === 'object' && !Buffer.isBuffer(value) && !Array.isArray(value)) {
+      obj[key] = txToHex(value);
+    } else if (isBigInt(value)) {
+      obj[key] = bigIntToString(value);
+    } else {
+      obj[key] = bufferToHex(value);
+    }
+  }
+  return obj;
+};
+
 /**
  * creates a transaction object to be used with the api client from
  * lisk elements
