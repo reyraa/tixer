@@ -29,7 +29,9 @@ const Form = ({ onSubmit }: FormProps) => {
 
   return (
     <form className='form'>
+      <label>Public key</label>
       <input placeholder='publicKey' value={publicKey} onChange={(e) => onchange(e, 'publicKey')} />
+      <label>Amount</label>
       <input placeholder='amount' value={amount} onChange={(e) => onchange(e, 'amount')}  />
       <button onClick={onClick}>Create</button>
     </form>

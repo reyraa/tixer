@@ -18,18 +18,21 @@ const TypeSelector = ({
   };
 
   return (
-      <select onChange={onChange}>
-        {
-          moduleAssets.map((item) => (
-            <option
-              value={item.id}
-              key={item.id}
-            >
-              {item.name}
-            </option>
-          ))
-        }
-      </select>
+      <form>
+        <label>Transaction type</label>
+        <select onChange={onChange}>
+          {
+            moduleAssets.map((item) => (
+              <option
+                value={item.id}
+                key={item.id}
+              >
+                {item.name}
+              </option>
+            ))
+          }
+        </select>
+      </form>
   );
 };
 

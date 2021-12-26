@@ -58,11 +58,13 @@ const Form = ({ onSubmit }: FormProps) => {
       {
         votes.map((vote, index) => (
           <fieldset>
+            <label>Delegate address</label>
             <input
               placeholder='delegateAddress'
               value={vote.delegateAddress}
               onChange={(e) => onchange(e, index, 'delegateAddress')}
             />
+            <label>Amount</label>
             <input
               placeholder='amount'
               value={vote.amount}

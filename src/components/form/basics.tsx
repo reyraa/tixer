@@ -40,8 +40,11 @@ const Sender = ({ setBasics, basics }: SenderProps) => {
 
   return (
     <form className='form'>
+      <label>Sender public key</label>
       <input placeholder='senderPublicKey' value={basics.senderPublicKey} onChange={(e) => onchange(e, 'senderPublicKey')} />
+      <label>Nonce</label>
       <input placeholder='nonce' type="number" value={basics.nonce} onChange={(e) => onchange(e, 'nonce')}  />
+      <label>Fee</label>
       <input placeholder='fee' type="number" value={basics.fee} onChange={(e) => onchange(e, 'fee')}  />
     </form>
   );

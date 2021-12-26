@@ -58,7 +58,9 @@ const Form = ({ onSubmit }: FormProps) => {
       {
         members.map((member, index) => (
           <fieldset key={index}>
+            <label>Public key</label>
             <input type="string" placeholder='publicKey' value={member.publicKey} onChange={(e) => onchange(e, index, 'publicKey')} />
+            <label>Mandatory member</label>
             <input type="checkbox" name='isMandatory' checked={member.isMandatory} onChange={(e) => onchange(e, index, 'isMandatory')}  />
             <button onClick={(e) => remove(e, index)}>Remove</button>
           </fieldset>

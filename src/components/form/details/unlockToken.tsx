@@ -25,6 +25,7 @@ const Form = ({ onSubmit }: FormProps) => {
 
   return (
     <form className='form'>
+      <label>Amount</label>
       <input placeholder='amount' value={amount} onChange={(e) => onchange(e, 'amount')} />
       <button onClick={onClick}>Create</button>
     </form>

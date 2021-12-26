@@ -32,8 +32,11 @@ const Form = ({ onSubmit }: FormProps) => {
 
   return (
     <form className='form'>
+      <label>Recipient address</label>
       <input placeholder='recipient' value={recipientAddress} onChange={(e) => onchange(e, 'recipientAddress')} />
+      <label>Amount</label>
       <input placeholder='amount' value={amount} onChange={(e) => onchange(e, 'amount')}  />
+      <label>Message</label>
       <input placeholder='message' value={data} onChange={(e) => onchange(e, 'data')}  />
       <button onClick={onClick}>Create</button>
     </form>
