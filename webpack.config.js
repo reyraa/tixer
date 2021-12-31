@@ -1,5 +1,6 @@
-const { ProvidePlugin, EnvironmentPlugin } = require('webpack');
+const { ProvidePlugin, EnvironmentPlugin, ContextReplacementPlugin } = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const { resolve } = require('path');
 
 const config = {
@@ -25,6 +26,20 @@ const config = {
   externals: {
     bufferutil: 'bufferutil',
     'utf-8-validate': 'utf-8-validate',
+  },
+  optimization: {
+    // moduleIds: 'named',
+    // minimizer: [new TerserPlugin({ test: /\.js(\?.*)?$/i })],
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor' ,
+          chunks: 'all' ,
+          enforce: true ,
+        },
+      },
+    },
   },
   module: {
     rules: [
@@ -98,10 +113,12 @@ const config = {
       inject: false,
       templateParameters: {
         // style: 'styles.[contenthash].css',
-        // bundle: 'bundle.vendor.[contenthash].js',
+        vendor: 'bundle.vendor.[contenthash].js',
         app: 'bundle.app.[contenthash].js',
       },
     }),
+    // new ContextReplacementPlugin(/bip39[\/\\]wordlists$/, /english/),
+    new BundleAnalyzerPlugin(),
   ],
 };
 
