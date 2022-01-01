@@ -31,14 +31,33 @@ const Form = ({ onSubmit }: FormProps) => {
   };
 
   return (
-    <form className='form'>
+    <form>
       <label>Recipient address</label>
-      <input placeholder='recipient' value={recipient} onChange={(e) => onchange(e, 'recipient')} />
+      <input
+        placeholder="recipient"
+        value={recipient}
+        onChange={(e) => onchange(e, 'recipient')}
+      />
       <label>Amount</label>
-      <input placeholder='amount' value={amount} onChange={(e) => onchange(e, 'amount')}  />
+      <input
+        placeholder="amount"
+        value={amount}
+        onChange={(e) => onchange(e, 'amount')}
+      />
       <label>Message</label>
-      <input placeholder='message' value={message} onChange={(e) => onchange(e, 'message')}  />
-      <button onClick={onClick}>Create</button>
+      <input
+        placeholder="message"
+        value={message}
+        onChange={(e) => onchange(e, 'message')}
+      />
+      <fieldset className="has-text-right">
+        <button
+          className="button is-primary"
+          onClick={onClick}
+        >
+          Create
+        </button>
+      </fieldset>
     </form>
   );
 }

@@ -52,16 +52,18 @@ const App = () => {
   }, [basics.senderPublicKey, network]);
 
   return (
-    <section>
+    <section className="container">
       <Header />
       <NetworkSelector onNetworkChanged={setNetwork} />
-      <Form
-        setBasics={setBasics}
-        onTxCreated={setTx}
-        networkConfig={networkConfig}
-        basics={basics}
-      />
-      <Result value={tx} />
+      <section className="columns">
+        <Form
+          setBasics={setBasics}
+          onTxCreated={setTx}
+          networkConfig={networkConfig}
+          basics={basics}
+        />
+        <Result value={tx} />
+      </section>
     </section>
   );
 }

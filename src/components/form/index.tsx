@@ -51,7 +51,7 @@ const Form = ({ onTxCreated, networkConfig, setBasics, basics }: FormProps) => {
   };
 
   return (
-    <section>
+    <main className="column">
       <TypeSelector
         moduleAssets={networkConfig.moduleAssets}
         onTypeChanged={setModuleAssetId}
@@ -60,7 +60,7 @@ const Form = ({ onTxCreated, networkConfig, setBasics, basics }: FormProps) => {
       {
         <Layout onSubmit={onSubmit} />
       }
-    </section>
+    </main>
   );
 }
 

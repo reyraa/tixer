@@ -14,18 +14,20 @@ const NetworkSelector = ({ onNetworkChanged }: NetworkSelectorProps) => {
   return (
     <form className="networkSelector">
       <label>Network</label>
-      <select onChange={onChange}>
-        {
-          Object.keys(networkNames).map((item) => (
-            <option
-              value={item}
-              key={item}
-            >
-              {networkNames[item].title}
-            </option>
-          ))
-        }
-      </select>
+      <div className="select">
+        <select onChange={onChange}>
+          {
+            Object.keys(networkNames).map((item) => (
+              <option
+                value={item}
+                key={item}
+              >
+                {networkNames[item].title}
+              </option>
+            ))
+          }
+        </select>
+      </div>
     </form>
   );
 }

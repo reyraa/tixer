@@ -54,32 +54,52 @@ const Form = ({ onSubmit }: FormProps) => {
 
 
   return (
-    <form className='form'>
+    <form>
       {
         votes.map((vote, index) => (
-          <fieldset>
-            <label>Delegate address</label>
-            <input
-              placeholder='delegateAddress'
-              value={vote.delegateAddress}
-              onChange={(e) => onchange(e, index, 'delegateAddress')}
-            />
-            <label>Amount</label>
-            <input
-              placeholder='amount'
-              value={vote.amount}
-              onChange={(e) => onchange(e, index, 'amount')}
-            />
-            <button
-              onClick={(e) => remove(e, index)}
-            >
-              Remove
-            </button>
+          <fieldset className="message is-info member" key={index}>
+            <div className="message-body">
+              <div className="columns">
+                <label className="column">{`Delegate address #${index + 1}`}</label>
+                <div className="column has-text-right">
+                  <button
+                    className="delete"
+                    onClick={(e) => remove(e, index)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+
+              <input
+                placeholder='delegateAddress'
+                value={vote.delegateAddress}
+                onChange={(e) => onchange(e, index, 'delegateAddress')}
+              />
+              <label>Amount</label>
+              <input
+                placeholder='amount'
+                value={vote.amount}
+                onChange={(e) => onchange(e, index, 'amount')}
+              />
+            </div>
           </fieldset>
         ))
       }
-      <button onClick={add}>Add</button>
-      <button onClick={submit}>Create</button>
+      <fieldset className="has-text-right">
+        <button
+          className="button"
+          onClick={add}
+        >
+          Add another delegate
+        </button>
+        <button
+          className="button is-primary"
+          onClick={submit}
+        >
+          Create
+        </button>
+      </fieldset>
     </form>
   );
 }
