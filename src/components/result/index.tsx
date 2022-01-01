@@ -17,23 +17,21 @@ const Result = ({ value }: ResultProps) => {
     setJson(JSON.stringify(val));
   }, [value]);
 
+  const defaultMessage = 'Create a Lisk transaction to sign using Lisk Mobile';
+
+  const message = isEmpty(value) ? defaultMessage : json;
+
   return (
-    <section className="result">
-       {
-         isEmpty(value)
-          ? null
-          : (
-            <div>
-              <QRCode value={json} />
-              <CopyToClipboard text={json} onCopy={() => setCopied(true)}>
-                  <button>
-                    { copied ? 'Copied' : 'Copy' }
-                  </button>
-              </CopyToClipboard>
-            </div>
-          )
-      }
-    </section>
+    <aside className="column result">
+      <div>
+        <QRCode value={message} />
+        <CopyToClipboard text={message} onCopy={() => setCopied(true)}>
+            <button>
+              { copied ? 'Copied' : 'Copy' }
+            </button>
+        </CopyToClipboard>
+      </div>
+    </aside>
   );
 }
 

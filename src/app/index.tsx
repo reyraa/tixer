@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { cryptography } from '@liskhq/lisk-client';
 import NetworkSelector from '../components/networkSelector';
 import Header from '../components/header';
 import Form from '../components/form';

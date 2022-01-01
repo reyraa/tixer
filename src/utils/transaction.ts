@@ -1,4 +1,4 @@
-import { cryptography } from '@liskhq/lisk-client';
+import { getAddressFromBase32Address } from '@liskhq/lisk-cryptography';
 
 const splitModuleAndAssetIds = (moduleAssetId: string) => {
   const [moduleID, assetID] = moduleAssetId.split(':');
@@ -15,9 +15,9 @@ export const LskToBed = (value: number|string = 0): bigint => (
 
 export const convertStringToBinary = (value: string) => Buffer.from(value, 'hex');
 
-export const getAddressFromBase32Address = (data: string) => {
+export const getAddressFromBase32 = (data: string) => {
   try {
-    return cryptography.getAddressFromBase32Address(data);
+    return getAddressFromBase32Address(data);
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e);
@@ -143,7 +143,7 @@ export const createTransaction = ({
 
   switch (moduleAssetId) {
     case moduleAssets[0].id: {
-      const binaryAddress = getAddressFromBase32Address(assets.recipientAddress);
+      const binaryAddress = getAddressFromBase32(assets.recipientAddress);
 
       transaction.asset = {
         recipientAddress: binaryAddress,
