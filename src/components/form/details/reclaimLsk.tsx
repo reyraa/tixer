@@ -31,12 +31,14 @@ const Form = ({ onSubmit }: FormProps) => {
     <form>
       <label>Public key</label>
       <input
+        type="text"
         placeholder="publicKey"
         value={publicKey}
         onChange={(e) => onchange(e, 'publicKey')}
       />
       <label>Amount</label>
       <input
+        type="text"
         placeholder="amount"
         value={amount}
         onChange={(e) => onchange(e, 'amount')}

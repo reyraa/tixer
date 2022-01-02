@@ -42,6 +42,7 @@ const Sender = ({ setBasics, basics }: SenderProps) => {
     <form>
       <label className="label">Sender public key</label>
       <input
+        type="text"
         placeholder="senderPublicKey"
         value={basics.senderPublicKey}
         onChange={(e) => onchange(e, 'senderPublicKey')}

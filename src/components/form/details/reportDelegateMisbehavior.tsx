@@ -34,18 +34,21 @@ const Form = ({ onSubmit }: FormProps) => {
     <form>
       <label>Recipient address</label>
       <input
+        type="text"
         placeholder="recipient"
         value={recipient}
         onChange={(e) => onchange(e, 'recipient')}
       />
       <label>Amount</label>
       <input
+        type="text"
         placeholder="amount"
         value={amount}
         onChange={(e) => onchange(e, 'amount')}
       />
       <label>Message</label>
       <input
+        type="text"
         placeholder="message"
         value={message}
         onChange={(e) => onchange(e, 'message')}

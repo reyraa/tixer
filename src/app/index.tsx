@@ -53,15 +53,17 @@ const App = () => {
 
   return (
     <section className="container">
-      <Header />
-      <NetworkSelector onNetworkChanged={setNetwork} />
-      <section className="columns">
-        <Form
-          setBasics={setBasics}
-          onTxCreated={setTx}
-          networkConfig={networkConfig}
-          basics={basics}
-        />
+        <section className="columns">
+          <main className="column">
+            <Header />
+            <NetworkSelector onNetworkChanged={setNetwork} />
+            <Form
+              setBasics={setBasics}
+              onTxCreated={setTx}
+              networkConfig={networkConfig}
+              basics={basics}
+            />
+        </main>
         <Result value={tx} />
       </section>
     </section>

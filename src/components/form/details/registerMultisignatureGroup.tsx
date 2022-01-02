@@ -72,7 +72,7 @@ const Form = ({ onSubmit }: FormProps) => {
               </div>
 
               <input
-                type="string"
+                type="text"
                 placeholder='publicKey'
                 value={member.publicKey}
                 onChange={(e) => onchange(e, index, 'publicKey')}

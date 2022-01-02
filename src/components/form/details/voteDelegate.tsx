@@ -72,12 +72,14 @@ const Form = ({ onSubmit }: FormProps) => {
               </div>
 
               <input
+                type="text"
                 placeholder='delegateAddress'
                 value={vote.delegateAddress}
                 onChange={(e) => onchange(e, index, 'delegateAddress')}
               />
               <label>Amount</label>
               <input
+                type="text"
                 placeholder='amount'
                 value={vote.amount}
                 onChange={(e) => onchange(e, index, 'amount')}

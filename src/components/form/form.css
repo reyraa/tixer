@@ -1,3 +1,13 @@
 .form {
   position: relative;
 }
+
+.member > div {
+  border-left: none !important;
+  color: initial !important;
+}
+
+.member .checkbox input,
+.member .radio input {
+  margin-right: 5px;
+}

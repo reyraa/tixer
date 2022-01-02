@@ -1,0 +1,47 @@
+.result {
+  background-color: #101c3d;
+  border-radius: 32px;
+}
+
+.result > div {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding-top: 100px;
+}
+
+.result footer {
+  background-color: #ffffff0f;
+  padding: 30px;
+  box-sizing: border-box;
+  margin: 32px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.result button {
+  margin-top: 30px;
+}
+
+.result h5 {
+  color: #fff;
+  margin: 0 0 1rem;
+}
+
+.result p {
+  margin: 0;
+  color: #7d86a2;
+}
+
+.result footer nav {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+}
+
+.result footer nav a {
+  margin: 10px 0;
+}

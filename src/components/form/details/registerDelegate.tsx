@@ -25,6 +25,7 @@ const Form = ({ onSubmit }: FormProps) => {
     <form>
       <label>Username</label>
       <input
+        type="text"
         placeholder="username"
         value={username}
         onChange={(e) => onchange(e, 'username')}
