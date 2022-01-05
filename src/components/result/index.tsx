@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import QRCode from "react-qr-code";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { isEmpty } from '../../utils/helpers';
@@ -14,13 +14,24 @@ interface ResultProps {
 const Result = ({ value }: ResultProps) => {
   const [json, setJson] = useState<any>({});
   const [copied, setCopied] = useState<boolean>(false);
+  const timeout = useRef<any>();
+
+  const copy = () => {
+    setCopied(true);
+
+    timeout.current = setTimeout(() => {
+      setCopied(false);
+    }, 1000);
+  }
+
   useEffect(() => {
     const val = txToHex(value);
     setJson(JSON.stringify(val));
   }, [value]);
 
-  const defaultMessage = 'Create a Lisk transaction to sign using Lisk Mobile';
+  useEffect(() => () => clearTimeout(timeout.current), []);
 
+  const defaultMessage = 'Create a Lisk transaction to sign using Lisk Mobile';
   const message = isEmpty(value) ? defaultMessage : json;
 
   return (
@@ -31,7 +42,7 @@ const Result = ({ value }: ResultProps) => {
           bgColor="#101c3d"
           fgColor="#FFFFFF"
         />
-        <CopyToClipboard text={message} onCopy={() => setCopied(true)}>
+        <CopyToClipboard text={message} onCopy={copy}>
             <button className="is-primary">
               { copied ? 'Copied' : 'Copy' }
             </button>

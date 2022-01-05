@@ -25,16 +25,18 @@ const Form = ({ onSubmit }: FormProps) => {
 
   return (
     <form>
-      <label>Amount</label>
-      <input
-        type="text"
-        placeholder="amount"
-        value={amount}
-        onChange={(e) => onchange(e, 'amount')}
-      />
+      <label>
+        <input
+          type="text"
+          placeholder="amount"
+          value={amount}
+          onChange={(e) => onchange(e, 'amount')}
+        />
+        <span>Amount</span>
+      </label>
       <fieldset className="has-text-right">
         <button
-          className="button is-primary"
+          className="is-primary"
           onClick={onClick}
         >
           Create

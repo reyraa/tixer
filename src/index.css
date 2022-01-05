@@ -40,6 +40,10 @@ input[type="number"] {
   box-sizing: border-box;
 }
 
+select {
+  color: #666;
+}
+
 select option {
   color: #333;
   background: #def1ff;
@@ -47,7 +51,41 @@ select option {
 }
 
 label {
-  display: none;
+  position: relative;
+  display: block;
+}
+
+label span {
+  position: absolute;
+  left: 20px;
+  top: 0;
+  background-color: #def1ff;
+  padding: 0 10px;
+  transform: translateY(50%);
+  transition: all ease 100ms;
+  font-size: 13px;
+}
+
+label.radio span {
+  background-color: transparent;
+  left: 0px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+input:focused + span {
+  top: 0 !important;
+  transform: translateY(50%) !important;
+  font-size: 13px !important;
+}
+
+input[type="number"][value="0"] + span,
+input[type="text"][value=""] + span {
+  color: black;
+  transform: translateY(-50%);
+  top: 50%;
+  font-size: 16px;
 }
 
 fieldset {
@@ -67,6 +105,34 @@ button {
   box-sizing: border-box;
   transition: all ease 100ms;
   cursor: pointer;
+}
+
+button.remove {
+  position: relative;
+  background: #b7b7b7;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+}
+
+button.remove:before,
+button.remove:after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 2px;
+  background-color: #fff;
+  left: 25%;
+  top: 47%;
+  position: absolute;
+}
+
+button.remove:before {
+  transform: rotate(45deg);
+}
+
+button.remove:after {
+  transform: rotate(-45deg);
 }
 
 button.is-secondary {
@@ -140,6 +206,10 @@ i {
 }
 small {
   font-size: 0.8rem;
+}
+
+iframe {
+  display: none;
 }
 
 @media screen and (max-width: 680px) {

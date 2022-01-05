@@ -11,3 +11,8 @@
 .member .radio input {
   margin-right: 5px;
 }
+
+label.memberTitle,
+label.voteTitle {
+  text-align: left;
+}

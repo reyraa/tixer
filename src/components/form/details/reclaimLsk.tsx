@@ -29,23 +29,27 @@ const Form = ({ onSubmit }: FormProps) => {
 
   return (
     <form>
-      <label>Public key</label>
-      <input
-        type="text"
-        placeholder="publicKey"
-        value={publicKey}
-        onChange={(e) => onchange(e, 'publicKey')}
-      />
-      <label>Amount</label>
-      <input
-        type="text"
-        placeholder="amount"
-        value={amount}
-        onChange={(e) => onchange(e, 'amount')}
-      />
+      <label>
+        <input
+          type="text"
+          placeholder="publicKey"
+          value={publicKey}
+          onChange={(e) => onchange(e, 'publicKey')}
+        />
+        <span>Public key</span>
+      </label>
+      <label>
+        <input
+          type="text"
+          placeholder="amount"
+          value={amount}
+          onChange={(e) => onchange(e, 'amount')}
+        />
+        <span>Amount</span>
+      </label>
       <fieldset className="has-text-right">
         <button
-          className="button is-primary"
+          className="is-primary"
           onClick={onClick}
         >
           Create

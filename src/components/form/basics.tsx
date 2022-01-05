@@ -40,27 +40,33 @@ const Sender = ({ setBasics, basics }: SenderProps) => {
 
   return (
     <form>
-      <label className="label">Sender public key</label>
-      <input
-        type="text"
-        placeholder="senderPublicKey"
-        value={basics.senderPublicKey}
-        onChange={(e) => onchange(e, 'senderPublicKey')}
-      />
-      <label className="label">Nonce</label>
-      <input
-        placeholder="nonce"
-        type="number"
-        value={basics.nonce}
-        onChange={(e) => onchange(e, 'nonce')}
-      />
-      <label className="label">Fee</label>
-      <input
-        placeholder="fee"
-        type="number"
-        value={basics.fee}
-        onChange={(e) => onchange(e, 'fee')}
-      />
+      <label className="label">
+        <input
+          type="text"
+          placeholder="senderPublicKey"
+          value={basics.senderPublicKey}
+          onChange={(e) => onchange(e, 'senderPublicKey')}
+        />
+        <span>Sender public key</span>
+      </label>
+      <label className="label">
+        <input
+          placeholder="nonce"
+          type="number"
+          value={basics.nonce}
+          onChange={(e) => onchange(e, 'nonce')}
+        />
+        <span>Nonce</span>
+      </label>
+      <label className="label">
+        <input
+          placeholder="fee"
+          type="number"
+          value={basics.fee}
+          onChange={(e) => onchange(e, 'fee')}
+        />
+        <span>Fee</span>
+      </label>
     </form>
   );
 }

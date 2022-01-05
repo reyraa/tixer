@@ -16,7 +16,7 @@ const emptyMember: Member = {
 };
 
 const Form = ({ onSubmit }: FormProps) => {
-  const [members, setMembers] = useState<Member[]>([]);
+  const [members, setMembers] = useState<Member[]>([emptyMember, emptyMember]);
 
   const onchange = (e: ChangeEvent<HTMLInputElement>, index: number, name: string) => {
     const newMembers: Member[] = members.map((member, i) => {
@@ -60,23 +60,23 @@ const Form = ({ onSubmit }: FormProps) => {
           <fieldset className="message is-info member" key={index}>
             <div className="message-body">
               <div className="columns">
-                <label className="label column">{`Public key #${index + 1}`}</label>
+                <label className="label column memberTitle">{`Member #${index + 1}`}</label>
                 <div className="column has-text-right">
                   <button
-                    className="delete"
+                    className="remove"
                     onClick={(e) => remove(e, index)}
-                  >
-                    Remove
-                  </button>
+                  ></button>
                 </div>
               </div>
-
-              <input
-                type="text"
-                placeholder='publicKey'
-                value={member.publicKey}
-                onChange={(e) => onchange(e, index, 'publicKey')}
-              />
+              <label>
+                <input
+                  type="text"
+                  placeholder='publicKey'
+                  value={member.publicKey}
+                  onChange={(e) => onchange(e, index, 'publicKey')}
+                />
+                <span>Public key</span>
+              </label>
               <label className="radio">
                 <input
                   type="checkbox"
@@ -84,7 +84,7 @@ const Form = ({ onSubmit }: FormProps) => {
                   checked={member.isMandatory}
                   onChange={(e) => onchange(e, index, 'isMandatory')}
                 />
-                Mandatory member
+                <span>Mandatory member</span>
               </label>
             </div>
           </fieldset>
@@ -92,13 +92,13 @@ const Form = ({ onSubmit }: FormProps) => {
       }
       <fieldset className="has-text-right">
         <button
-          className="button mt-2 mr-2"
+          className="is-secondary mt-2 mr-2"
           onClick={add}
         >
           Add another member
         </button>
         <button
-          className="button is-primary mt-2"
+          className="is-primary mt-2"
           onClick={submit}
         >
           Create

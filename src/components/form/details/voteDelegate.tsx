@@ -16,7 +16,7 @@ const emptyVote: Vote = {
 };
 
 const Form = ({ onSubmit }: FormProps) => {
-  const [votes, setVotes] = useState<Vote[]>([]);
+  const [votes, setVotes] = useState<Vote[]>([emptyVote]);
 
   const onchange = (e: ChangeEvent<HTMLInputElement>, index: number, name: string) => {
     const newVotes: Vote[] = votes.map((vote, i) => {
@@ -60,43 +60,46 @@ const Form = ({ onSubmit }: FormProps) => {
           <fieldset className="message is-info member" key={index}>
             <div className="message-body">
               <div className="columns">
-                <label className="column">{`Delegate address #${index + 1}`}</label>
+                <label className="column voteTitle">{`Delegate #${index + 1}`}</label>
                 <div className="column has-text-right">
                   <button
-                    className="delete"
+                    className="remove"
                     onClick={(e) => remove(e, index)}
-                  >
-                    Remove
-                  </button>
+                  ></button>
                 </div>
               </div>
 
-              <input
-                type="text"
-                placeholder='delegateAddress'
-                value={vote.delegateAddress}
-                onChange={(e) => onchange(e, index, 'delegateAddress')}
-              />
-              <label>Amount</label>
-              <input
-                type="text"
-                placeholder='amount'
-                value={vote.amount}
-                onChange={(e) => onchange(e, index, 'amount')}
-              />
+              <label>
+                <input
+                  type="text"
+                  placeholder='Delegate Address'
+                  value={vote.delegateAddress}
+                  onChange={(e) => onchange(e, index, 'delegateAddress')}
+                />
+                <span>Delegate Address</span>
+              </label>
+              <label>
+                <input
+                  type="text"
+                  placeholder='amount'
+                  value={vote.amount}
+                  onChange={(e) => onchange(e, index, 'amount')}
+                />
+                <span>Amount</span>
+              </label>
             </div>
           </fieldset>
         ))
       }
       <fieldset className="has-text-right">
         <button
-          className="button"
+          className="is-secondary"
           onClick={add}
         >
           Add another delegate
         </button>
         <button
-          className="button is-primary"
+          className="is-primary"
           onClick={submit}
         >
           Create
