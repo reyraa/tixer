@@ -1,68 +1,78 @@
-import React, { useState, ChangeEvent, MouseEvent } from 'react';
+import React, { useState, MouseEvent } from 'react';
+import {
+  validateAddress,
+  validateAmount,
+  validateData,
+}  from '../validators';
+import Input from '../input';
 import '../form.css';
+
+interface Value {
+  data: any;
+  error: string;
+}
 
 interface FormProps {
   onSubmit: (tx: any) => void
 }
 
 const Form = ({ onSubmit }: FormProps) => {
-  const [recipientAddress, setRecipientAddress] = useState('');
-  const [amount, setAmount] = useState('');
-  const [data, setData] = useState('');
+  const [recipientAddress, setRecipientAddress] = useState({ data: '', error: '' });
+  const [amount, setAmount] = useState({ data: '', error: '' });
+  const [data, setData] = useState({ data: '', error: '' });
 
-  const onchange = (e: ChangeEvent<HTMLInputElement>, name: string) => {
+  const onChange = (value: Value, name: string) => {
     switch (name) {
       case 'recipientAddress':
-        setRecipientAddress(e.target.value);
+        setRecipientAddress(value);
         break;
       case 'amount':
-        setAmount(e.target.value);
+        setAmount(value);
         break;
       default:
-        setData(e.target.value);
+        setData(value);
     }
   };
 
   const onClick = (e: MouseEvent) => {
     e.preventDefault();
     onSubmit({
-      recipientAddress, amount, data,
+      recipientAddress: recipientAddress.data,
+      amount: amount.data,
+      data: data.data,
     });
   };
 
+  const hasError = Boolean(recipientAddress.error || amount.error || data.error);
+
   return (
     <form>
-      <label>
-        <input
-          type="text"
-          placeholder="recipient"
-          value={recipientAddress}
-          onChange={(e) => onchange(e, 'recipientAddress')}
-        />
-        <span>Recipient address</span>
-      </label>
-      <label>
-        <input
-          type="text"
-          placeholder="amount"
-          value={amount}
-          onChange={(e) => onchange(e, 'amount')}
-        />
-        <span>Amount</span>
-      </label>
-      <label>
-        <input
-          type="text"
-          placeholder="message"
-          value={data}
-          onChange={(e) => onchange(e, 'data')}
-        />
-        <span>Message</span>
-      </label>
+      <Input
+        type="text"
+        label="Recipient address"
+        validator={validateAddress}
+        value={recipientAddress}
+        onChange={(val) => onChange(val, 'recipientAddress')}
+      />
+      <Input
+        type="text"
+        label="Amount"
+        value={amount}
+        validator={validateAmount}
+        onChange={(val) => onChange(val, 'amount')}
+      />
+      <Input
+        type="text"
+        label="Message"
+        value={data}
+        validator={validateData}
+        onChange={(val) => onChange(val, 'data')}
+      />
       <fieldset className="has-text-right">
         <button
           className="is-primary"
           onClick={onClick}
+          disabled={hasError}
         >
           Create
         </button>

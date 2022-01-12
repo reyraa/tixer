@@ -7,9 +7,9 @@ import Basics from './basics'
 import './form.css';
 
 interface BasicProps {
-  senderPublicKey: string;
-  nonce: number;
-  fee: number;
+  senderPublicKey: { data: string, error: string };
+  nonce: { data: number, error: string };
+  fee: { data: number, error: string };
 }
 
 interface FormProps {
@@ -42,7 +42,9 @@ const Form = ({ onTxCreated, networkConfig, setBasics, basics }: FormProps) => {
 
   const onSubmit = (assets: any) => {
     const props: CreateTransactionProps = {
-      ...basics,
+      senderPublicKey: basics.senderPublicKey.data,
+      fee: basics.fee.data,
+      nonce: basics.nonce.data,
       assets,
       moduleAssetId,
       moduleAssets: networkConfig.moduleAssets,

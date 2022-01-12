@@ -8,7 +8,7 @@ interface FormProps {
 const Form = ({ onSubmit }: FormProps) => {
   const [username, setUsername] = useState('');
 
-  const onchange = (e: ChangeEvent<HTMLInputElement>, name: string) => {
+  const onchange = (e: ChangeEvent<HTMLInputElement>, name: string): void => {
     switch (name) {
       case 'username':
         setUsername(e.target.value);
