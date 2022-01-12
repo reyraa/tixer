@@ -153,6 +153,13 @@ button.is-primary:hover {
   border-color: #4070f4;
 }
 
+button:disabled {
+  background-color: #c8c8c8 !important;
+  border-color: #d7d7d7 !important;
+  color: #999 !important;
+  cursor: initial;
+}
+
 .columns {
   display: flex;
   flex-direction: row nowrap;
