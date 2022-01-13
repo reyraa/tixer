@@ -1,14 +1,23 @@
+import { validateBase32Address } from '@liskhq/lisk-cryptography';
+
 type Validator = (value: any, info?: any) => string;
 
 export const validateAddress: Validator = (value) => {
-  return '';
+  try {
+    return validateBase32Address(value) ? '' : 'The address is not valid';
+  } catch (e) {
+    return 'The address is not valid';
+  }
 };
 
 export const validatePublicKey: Validator = (value) => {
-  return '';
+  const reg = /^[0-9a-f]{64}$/;
+  return reg.test(value) ? '' : 'The public key is not valid';
 };
 
 export const validateFee: Validator = (value) => {
+  // number
+  // less than cap
   return '';
 };
 
@@ -26,4 +35,3 @@ export const validateData: Validator = (value) => {
   const size = encodeURI(value).split(/%..|./).length - 1;
   return size > 64 ? 'Message must be smaller than 64 bytes' : '';
 };
-

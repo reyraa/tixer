@@ -24,7 +24,7 @@ interface BasicsProps {
 }
 
 const Basics = ({ setBasics, basics }: BasicsProps) => {
-  const onchange = (value: Value, name: string) => {
+  const onChange = (value: Value, name: string) => {
     switch (name) {
       case 'senderPublicKey':
         setBasics({
@@ -59,14 +59,14 @@ const Basics = ({ setBasics, basics }: BasicsProps) => {
         onChange={(val) => onChange(val, 'senderPublicKey')}
       />
       <Input
-        type="number"
+        type="text"
         label="Nonce"
         validator={validateNonce}
         value={basics.nonce}
         onChange={(val) => onChange(val, 'nonce')}
       />
       <Input
-        type="number"
+        type="text"
         label="Fee"
         validator={validateFee}
         value={basics.fee}
