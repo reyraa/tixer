@@ -21,6 +21,11 @@ export const validateFee: Validator = (value) => {
   return '';
 };
 
+export const validateUsername: Validator = (value) => {
+  const reg = /^[a-z0-9!@$&_.]{3,20}$/;
+  return reg.test(value) ? "" : 'Username is not valid'
+}
+
 export const validateAmount: Validator = (value) => {
   const hasError = Number(value) != value || Number(value) <= 0;
   return hasError ? 'Value must be a positive number' : '';
