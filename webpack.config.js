@@ -14,6 +14,7 @@ const config = {
   },
   resolve: {
     fallback: {
+      buffer: require.resolve("buffer/"),
       net: false,
       fs: false,
       os: false,
@@ -72,6 +73,7 @@ const config = {
                 regenerator: true,
               },
             ],
+            'react-hot-loader/babel'
           ],
           env: {
             test: {
