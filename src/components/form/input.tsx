@@ -27,13 +27,13 @@ const Input = ({
 
 
   return <label className='inputWrapper'>
+    <span className='inputLabel'>{ label }</span>
     <input
+      className='input-val'
       type={type}
-      placeholder="amount"
       value={value.data}
       onChange={(e) => onChangeInternal(e)}
-    />
-    <span className='inputLabel'>{ label }</span>
+    /> 
     {
       value.error ? (
         <span className='inputError'>{ value.error }</span>

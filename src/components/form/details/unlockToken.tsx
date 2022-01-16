@@ -1,17 +1,24 @@
 import React, { useState, ChangeEvent, MouseEvent } from 'react';
 import '../form.css';
+import Input from '../input';
+import { validateAmount } from '../validators';
 
 interface FormProps {
   onSubmit: (tx: any) => void
 }
 
-const Form = ({ onSubmit }: FormProps) => {
-  const [amount, setAmount] = useState('');
+interface Value {
+  data: any;
+  error: string;
+}
 
-  const onchange = (e: ChangeEvent<HTMLInputElement>, name: string) => {
+const Form = ({ onSubmit }: FormProps) => {
+  const [amount, setAmount] = useState({data: "",error: ''});
+
+  const onchange = (val: Value, name: string) => {
     switch (name) {
       case 'amount':
-        setAmount(e.target.value);
+        setAmount(val);
         break;
     }
   };
@@ -25,15 +32,13 @@ const Form = ({ onSubmit }: FormProps) => {
 
   return (
     <form>
-      <label>
-        <input
+      <Input
           type="text"
-          placeholder="amount"
+          label="amount"
           value={amount}
-          onChange={(e) => onchange(e, 'amount')}
+          validator={validateAmount}
+          onChange={(val) => onchange(val, 'amount')}
         />
-        <span>Amount</span>
-      </label>
       <fieldset className="has-text-right">
         <button
           className="is-primary"

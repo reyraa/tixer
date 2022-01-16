@@ -1,35 +1,55 @@
 import React, { useState, ChangeEvent, MouseEvent } from 'react';
+import { validatePublicKey } from '../validators';
 import '../form.css';
+import Input from '../input';
 
 interface FormProps {
   onSubmit: (tx: any) => void
 }
 
 interface Member {
-  publicKey: string;
+  publicKey: { data: string, error: string };
   isMandatory: boolean;
 }
 
+interface Value {
+  data: any;
+  error: string;
+}
 const emptyMember: Member = {
-  publicKey: '',
+  publicKey: { data: '', error: '' },
   isMandatory: true,
 };
 
 const Form = ({ onSubmit }: FormProps) => {
   const [members, setMembers] = useState<Member[]>([emptyMember, emptyMember]);
 
-  const onchange = (e: ChangeEvent<HTMLInputElement>, index: number, name: string) => {
+  const onChange = (val: Value, index: number, name: string) => {
     const newMembers: Member[] = members.map((member, i) => {
       if (index === i) {
         return {
-          publicKey: name === 'publicKey' ? e.target.value : member.publicKey,
-          isMandatory: name === 'isMandatory' ? Boolean(e.target.checked) : member.isMandatory,
+          publicKey: val,
+          isMandatory: member.isMandatory,
         }
       }
       return member;
     });
     setMembers(newMembers);
   };
+
+
+  const onChecked = (e: ChangeEvent<HTMLInputElement>, index: number, name: string) => {
+    const newMembers: Member[] = members.map((member, i) => {
+      if (index === i) {
+        return {
+          publicKey: member.publicKey,
+          isMandatory: e.target.checked,
+        }
+      }
+      return member;
+    });
+    setMembers(newMembers);
+  }
 
   const submit = (e: MouseEvent) => {
     e.preventDefault();
@@ -68,21 +88,20 @@ const Form = ({ onSubmit }: FormProps) => {
                   ></button>
                 </div>
               </div>
-              <label>
-                <input
-                  type="text"
-                  placeholder='publicKey'
-                  value={member.publicKey}
-                  onChange={(e) => onchange(e, index, 'publicKey')}
-                />
-                <span>Public key</span>
-              </label>
+
+              <Input
+                type="text"
+                label='publickey'
+                value={member.publicKey}
+                validator={validatePublicKey} 
+                onChange={(val) => onChange(val, index ,'publicKey')}
+               />
               <label className="radio">
                 <input
                   type="checkbox"
                   name='isMandatory'
                   checked={member.isMandatory}
-                  onChange={(e) => onchange(e, index, 'isMandatory')}
+                  onChange={(e) => onChecked(e, index, 'isMandatory')}
                 />
                 <span>Mandatory member</span>
               </label>

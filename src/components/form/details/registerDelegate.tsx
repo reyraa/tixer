@@ -1,17 +1,23 @@
-import React, { useState, ChangeEvent, MouseEvent } from 'react';
+import React, { useState, MouseEvent } from 'react';
 import '../form.css';
+import Input from '../input';
+import { validateUsername } from '../validators';
 
 interface FormProps {
   onSubmit: (tx: any) => void
 }
 
+interface Value {
+  data: any;
+  error: string;
+}
 const Form = ({ onSubmit }: FormProps) => {
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState({data: "", error: ""});
 
-  const onchange = (e: ChangeEvent<HTMLInputElement>, name: string): void => {
+  const onchange = (val: Value, name: string): void => {
     switch (name) {
       case 'username':
-        setUsername(e.target.value);
+        setUsername(val);
         break;
     }
   };
@@ -23,15 +29,15 @@ const Form = ({ onSubmit }: FormProps) => {
 
   return (
     <form>
-      <label>
-        <input
+      <Input
           type="text"
-          placeholder="username"
+          label="username"
           value={username}
-          onChange={(e) => onchange(e, 'username')}
+          validator={validateUsername}
+          onChange={(val) => onchange(val, 'username')}
         />
-        <span>Username</span>
-      </label>
+
+
       <fieldset className="has-text-right">
         <button
           className="is-primary"
