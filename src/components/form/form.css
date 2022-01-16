@@ -16,3 +16,15 @@ label.memberTitle,
 label.voteTitle {
   text-align: left;
 }
+
+.inputWrapper {
+  padding: 15px 0px;
+}
+
+.inputError {
+  color: red;
+  font-weight: 300;
+  font-size: 14px;
+  padding-left: 30px;
+  margin-top: -5px;
+}
