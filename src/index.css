@@ -28,12 +28,12 @@ form {
 select,
 input[type="text"],
 input[type="number"] {
-  height: 56px;
+  height: 70px;
   width: 100%;
   border: 0;
   margin: 10px 0;
   border-radius: 10px;
-  padding: 0 30px;
+  padding: 15px 30px 0;
   font-size: 16px;
   color: #333;
   background: #def1ff;
@@ -58,12 +58,12 @@ label {
 label span {
   position: absolute;
   left: 20px;
-  top: 0;
-  background-color: #def1ff;
+  top: 20px;
   padding: 0 10px;
   transform: translateY(50%);
   transition: all ease 100ms;
   font-size: 13px;
+  border-radius: 10px;
 }
 
 label.radio span {
@@ -74,18 +74,16 @@ label.radio span {
   position: relative;
 }
 
-input:focused + span {
-  top: 0 !important;
+/* input:focus ~ span.inputLabel {
+  top: 10px !important;
   transform: translateY(50%) !important;
   font-size: 13px !important;
-}
+}  */
 
-input[type="number"][value="0"] + span,
-input[type="text"][value=""] + span {
+input[type="number"][value="0"] ~ span.inputLabel,
+input[type="text"][value=""] ~ span.inputLabel {
   color: black;
-  transform: translateY(-50%);
-  top: 50%;
-  font-size: 16px;
+  
 }
 
 fieldset {
