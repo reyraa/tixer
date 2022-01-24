@@ -1,20 +1,25 @@
-const { ProvidePlugin, EnvironmentPlugin, ContextReplacementPlugin } = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const { resolve } = require('path');
+const {
+  ProvidePlugin,
+  EnvironmentPlugin,
+  ContextReplacementPlugin,
+} = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const path = require('path')
 
 const config = {
   mode: 'production',
   entry: {
-    app: `${resolve(__dirname, './src/index.tsx')}`,
+    app: `${path.resolve(__dirname, './src/index.tsx')}`,
   },
   output: {
-    path: resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.[name].[contenthash].js',
+    publicPath: '/',
   },
   resolve: {
     fallback: {
-      buffer: require.resolve("buffer/"),
       net: false,
       fs: false,
       os: false,
@@ -35,9 +40,9 @@ const config = {
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendor' ,
-          chunks: 'all' ,
-          enforce: true ,
+          name: 'vendor',
+          chunks: 'all',
+          enforce: true,
         },
       },
     },
@@ -51,15 +56,18 @@ const config = {
         resolve: {
           extensions: ['.tsx', '.ts', '.js'],
         },
+
         options: {
           presets: [
             [
-              '@babel/preset-env', {
+              '@babel/preset-env',
+              {
                 modules: false,
                 targets: {
                   browsers: ['last 2 versions', 'safari >= 7'],
                 },
-              }],
+              },
+            ],
             '@babel/preset-react',
             '@babel/preset-typescript',
           ],
@@ -73,7 +81,6 @@ const config = {
                 regenerator: true,
               },
             ],
-            'react-hot-loader/babel'
           ],
           env: {
             test: {
@@ -94,24 +101,42 @@ const config = {
         test: /\.css$/i,
         use: [
           {
-            loader: "style-loader",
-            options: { injectType: "singletonStyleTag" },
+            loader: 'style-loader',
+            options: { injectType: 'singletonStyleTag' },
           },
-          "css-loader",
+          'css-loader',
         ],
       },
+      // {
+      //   test: /\.svg$/i,
+      //   use: [
+      //     {
+      //       loader: 'svg-url-loader',
+      //       options: {
+      //         limit: 10000,
+      //         join: (uri, base) => path.join('../..', base, uri),
+      //       },
+      //     },
+      //   ],
+      // },
       {
-        test: /\.svg$/i,
+        test: /\.(jpe?g|png|gif|woff|woff2|otf|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
         use: [
           {
-            loader: 'svg-url-loader',
+            loader: 'url-loader',
             options: {
-              limit: 10000,
+              limit: 1000,
+              join: (uri, base) => path.join('../..', base, uri),
+
+              name: 'assets/img/[name].[ext]',
             },
           },
         ],
       },
     ],
+  },
+  devServer: {
+    historyApiFallback: true,
   },
   plugins: [
     new ProvidePlugin({
@@ -133,7 +158,6 @@ const config = {
     // new ContextReplacementPlugin(/bip39[\/\\]wordlists$/, /english/),
     new BundleAnalyzerPlugin(),
   ],
-};
+}
 
-module.exports = config;
-
+module.exports = config
